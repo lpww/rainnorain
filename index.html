@@ -1,0 +1,47 @@
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.7/jquery.min.js"></script>
+<script type="text/javascript">
+   var jumperTest = function(mornTemp, afterTemp, evenTemp) {
+      var jumps = ["Don't bring a jumper this morning!", "Don't bring a jumper this afternoon!", "Don't bring a jumper this evening!"];
+      if(mornTemp < 65){
+         jumps[0] = "Bring a jumper this morning!";
+      }
+      if(afterTemp < 65){
+         jumps[1] = "Bring a jumper this afternoon!";
+      }
+      if(evenTemp < 65){
+         jumps[2] = "Bring a jumper this evening!";
+      }
+      return jumps;
+   };
+   var jacketTest = function(mornPop, afterPop, evenPop) {
+      var jumps = ["Don't bring a jacket this morning!", "Don't bring a jacket this afternoon!", "Don't bring a jacket this evening!"];
+      if(mornPop > 25){
+         jumps[0] = "Bring a jacket this morning!";
+      }
+      if(afterPop > 25){
+         jumps[1] = "Bring a jacket this afternoon!";
+      }
+      if(evenPop > 25){
+         jumps[2] = "Bring a jacket this evening!";
+      }
+      return jumps;
+   };
+   jQuery(document).ready(function($) {
+      $.ajax({
+         url: "http://api.aerisapi.com/forecasts/:auto?filter=6hr&plimit=3&from=today+T06:00:00-08:00&client_id=iHeZxH8vaFLuunuhMacVq&client_secret=gsqSJT5AwiZ9UD6LFE30WXXJZE5udXOTD0m57o9J",
+         dataType: "jsonp",
+         success: function(json) {
+            if (json.success == true) {
+               var ob = json.response;
+               var jumperAnswer = jumperTest(ob[0].periods[0].minFeelslikeF, ob[0].periods[1].minFeelslikeF, ob[0].periods[2].minFeelslikeF);
+               var jacketAnswer = jacketTest(ob[0].periods[0].pop, ob[0].periods[1].pop, ob[0].periods[2].pop);
+               $('#js').html(jumperAnswer[0] + "<br>" + jumperAnswer[1] + "<br>" + jumperAnswer[2] + "<br>" + jacketAnswer[1] + "<br>" + jacketAnswer[2] + "<br>" + jacketAnswer[1]); 
+            }
+            else {
+               alert('An error occurred: ' + json.error.description);
+            }
+         }
+      });
+   });
+</script>
+<div id="js"></div>
