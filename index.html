@@ -28,8 +28,8 @@
    };
    jQuery(document).ready(function($) {
       $.ajax({
-         url: "http://api.aerisapi.com/forecasts/:auto?filter=6hr&plimit=3&from=today+T06:00:00-08:00&client_id=iHeZxH8vaFLuunuhMacVq&client_secret=gsqSJT5AwiZ9UD6LFE30WXXJZE5udXOTD0m57o9J",
-         dataType: "jsonp",
+         url: "/api",
+         dataType: "json",
          success: function(json) {
             if (json.success == true) {
                var ob = json.response;
