@@ -13,6 +13,10 @@ function buildRequest(query, credentials) {
     var url = 'http://api.aerisapi.com/forecasts/:auto?',
         params = credentials;
 
+    if(Object.keys(query).length === 1){
+        url = "http://api.aerisapi.com/places/closest?";
+    }
+
     for (var param in query) {
         params[param] = query[param];
     }

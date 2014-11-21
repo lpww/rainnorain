@@ -1,30 +1,64 @@
 <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.7/jquery.min.js"></script>
 <script type="text/javascript">
-   var jumperTest = function(mornTemp, afterTemp, evenTemp) {
-      var jumps = ["Don't bring a jumper this morning!", "Don't bring a jumper this afternoon!", "Don't bring a jumper this evening!"];
-      if(mornTemp < 65){
-         jumps[0] = "Bring a jumper this morning!";
-      }
-      if(afterTemp < 65){
-         jumps[1] = "Bring a jumper this afternoon!";
-      }
-      if(evenTemp < 65){
-         jumps[2] = "Bring a jumper this evening!";
-      }
-      return jumps;
+   var locationFinder = function(lat, long){
+         jQuery(document).ready(function($) {
+            $.ajax({
+            url: "/api/",
+            data: "p=" + lat + "," + long,
+            dataType: "json",
+            success: function(json) {
+               if (json.success == true) {
+                  var ab = json.response;
+                  $('#location').html("You are in " + ab[0].place.name + ", " + ab[0].place.stateFull); 
+               }
+               else {
+                  alert('An error occurred: ' + json.error.description);
+               }
+            }
+         });
+      });
    };
+
+   var jumperTest = function(mornTemp, afterTemp, evenTemp) {
+      if(mornTemp < 60){
+         $('#morningSweater').html("Bring a sweater this morning!");
+      }
+      else{
+         $('#morningSweater').html("You wont need a sweater this morning!");
+      }
+      if(afterTemp < 60){
+         $('#afternoonSweater').html("Bring a sweater this afternoon!");
+      }
+      else{
+         $('#afternoonSweater').html("You wont need a sweater this afternoon!");
+      }
+      if(evenTemp < 60){
+         $('#eveningSweater').html("Bring a sweater this evening!");
+      }
+      else{
+         $('#eveningSweater').html("You wont need a sweater this evening!");
+      }
+   };
+
    var jacketTest = function(mornPop, afterPop, evenPop) {
-      var jumps = ["Don't bring a jacket this morning!", "Don't bring a jacket this afternoon!", "Don't bring a jacket this evening!"];
       if(mornPop > 25){
-         jumps[0] = "Bring a jacket this morning!";
+         $('#morningJacket').html("Bring a jacket this morning!");
+      }
+      else{
+         $('#morningJacket').html("You wont need a jacket this morning!");
       }
       if(afterPop > 25){
-         jumps[1] = "Bring a jacket this afternoon!";
+         $('#afternoonJacket').html("Bring a jacket this afternoon!");
+      }
+      else{
+         $('#afternoonJacket').html("You wont need a jacket this afternoon!");
       }
       if(evenPop > 25){
-         jumps[2] = "Bring a jacket this evening!";
+         $('#eveningJacket').html("Bring a jacket this evening!");
       }
-      return jumps;
+      else{
+         $('#eveningJacket').html("You wont need a jacket this evening!");
+      }
    };
    jQuery(document).ready(function($) {
       $.ajax({
@@ -35,9 +69,9 @@
          success: function(json) {
             if (json.success == true) {
                var ob = json.response;
-               var jumperAnswer = jumperTest(ob[0].periods[0].minFeelslikeF, ob[0].periods[1].minFeelslikeF, ob[0].periods[2].minFeelslikeF);
-               var jacketAnswer = jacketTest(ob[0].periods[0].pop, ob[0].periods[1].pop, ob[0].periods[2].pop);
-               $('#js').html(jumperAnswer[0] + "<br>" + jumperAnswer[1] + "<br>" + jumperAnswer[2] + "<br>" + jacketAnswer[1] + "<br>" + jacketAnswer[2] + "<br>" + jacketAnswer[1]); 
+               locationFinder(ob[0].loc.lat, ob[0].loc.long);
+               jumperTest(ob[0].periods[0].minFeelslikeF, ob[0].periods[1].minFeelslikeF, ob[0].periods[2].minFeelslikeF);
+               jacketTest(ob[0].periods[0].pop, ob[0].periods[1].pop, ob[0].periods[2].pop);
             }
             else {
                alert('An error occurred: ' + json.error.description);
@@ -46,4 +80,17 @@
       });
    });
 </script>
-<div id="js"></div>
+<div id="location"></div>
+<div id="time"></div>
+<div id="morning">
+   <div id="morningSweater"></div>
+   <div id="morningJacket"></div>
+</div>
+<div id="afternoon">
+   <div id="afternoonSweater"></div>
+   <div id="afternoonJacket"></div>
+</div>
+<div id="evening">
+   <div id="eveningSweater"></div>
+   <div id="eveningJacket"></div>
+</div>
