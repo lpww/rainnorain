@@ -1,7 +1,10 @@
+"use strict"
+
 var connect = require('connect'),
     serveStatic = require('serve-static'),
     api = require('./api/request'),
-    app = connect();
+    app = connect(),
+    querystring = require('querystring');
 
 // Routing for all static assets such as index.html
 app.use(serveStatic(__dirname)).listen(3000);
@@ -11,8 +14,11 @@ app.use('/api', function apiResponse(req, res) {
     // Return the correct header
     res.setHeader('Content-Type', 'application/json');
 
+    // Parse query into an object
+    var query = querystring.parse(req.url.replace('/?', ''));
+
     // Call api.get() to return a response when /api is visited
-    api.get(function responseCallback(data) {
+    api.get(query, function responseCallback(data) {
         res.end(data);
     });
 });

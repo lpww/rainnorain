@@ -1,14 +1,32 @@
-// Import our hidden endpoint and the Node HTTP module
-var endpoint = require('./endpoint'),
-    http = require('http');
+"use strict"
+
+// Import our hidden credentials and the Node HTTP module
+var credentials = require('./credentials'),
+    http = require('http'),
+    querystring = require('querystring');
+
+// Builds a full request URL
+// by combining the basic API URL
+// our hidden credentials
+// and the requested params
+function buildRequest(query, credentials) {
+    var url = 'http://api.aerisapi.com/forecasts/:auto?',
+        params = credentials;
+
+    for (var param in query) {
+        params[param] = query[param];
+    }
+
+    return url + querystring.stringify(params);
+}
 
 module.exports = {
     // Our single method for retrieving data
-    get: function getResponse(callback) {
+    get: function getResponse(query, callback) {
 
         // Make a get request on our endpoint
         // Returns an IncomingMessage object (res)
-        http.get(endpoint, function httpGetRequest(res){
+        http.get(buildRequest(query, credentials), function httpGetRequest(res){
             // This stores our returned data
             var data = '';
 

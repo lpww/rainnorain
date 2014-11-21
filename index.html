@@ -28,7 +28,9 @@
    };
    jQuery(document).ready(function($) {
       $.ajax({
-         url: "/api",
+         url: "/api/",
+         // The data we want to get
+         data: 'filter=6hr&plimit=3&from=today+T06:00:00-08:00',
          dataType: "json",
          success: function(json) {
             if (json.success == true) {
