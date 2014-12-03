@@ -19,31 +19,41 @@ var locationFinder = function(lat, long){
 
    var jumperTest = function(id, temp) {
       if(temp < 60){
-         $(id).html("Bring a sweater this morning!");
+         $("#" + id + "Card").attr('class', 'card-image green lighten');
+         $("#" + id + "Img").attr("src", "img/jumper.svg");
+         $("." + id).html("<p>...bring a sweater!</p>");
       }
       else{
-         $(id).html("You wont need a sweater this morning!");
+         $("#" + id + "Card").attr('class', 'card-image yellow lighten-1');
+         $("#" + id + "Img").attr("src", "img/glasses.svg");
+         $("." + id).html("<p>...bring your sunnies!</p>");
       }
    };
 
    var jacketTest = function(mornPop, afterPop, evenPop, mornTemp, afterTemp, evenTemp) {
-      if(mornPop > 25){
-         $('#morningJacket').html("Bring a jacket this morning!");
+      if(mornPop > 100){
+         $("#morningCard").attr('class', 'card-image blue lighten-1');
+         $('#morningImg').attr("src", "img/umbrella.svg");
+         $('.morning').html("<p>...bring an umbrella!</p>");
       }
       else{
-         jumperTest('#morningJacket', mornTemp);
+         jumperTest('morning', mornTemp);
       }
-      if(afterPop > 25){
-         $('#afternoonJacket').html("Bring a jacket this afternoon!");
+      if(afterPop > 100){
+         $("#afternoonCard").attr('class', 'card-image blue lighten-1');
+         $('#afternoonImg').attr("src", "img/umbrella.svg");
+         $('.afternoon').html("<p>...bring an umbrella!</p>");
       }
       else{
-         jumperTest('#afternoonJacket', afterTemp);
+         jumperTest('afternoon', afterTemp);
       }
       if(evenPop > 25){
-         $('#eveningJacket').html("Bring a jacket this evening!");
+         $("#eveningCard").attr('class', 'card-image blue lighten-1');
+         $('#eveningImg').attr("src", "img/umbrella.svg");
+         $('.evening').html("<p>...bring an umbrella!</p>");
       }
       else{
-         jumperTest('#eveningJacket', evenTemp);
+         jumperTest('evening', evenTemp);
       }
    };
    jQuery(document).ready(function($) {
