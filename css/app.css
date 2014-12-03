@@ -1,0 +1,43 @@
+#logo{
+	font-size: 2em;
+	text-align: center;
+}
+
+h1{
+	font-size: 2.5em;
+	font-weight: 600;
+	letter-spacing: 0.05em;
+	line-height:0.85;
+}
+
+#location{
+	text-align: center;
+	font-variant: small-caps;
+	font-size: 1.2em;	
+	letter-spacing: 0.4em;
+}
+
+hr{
+	margin-bottom: 3em;
+	margin-top: 2em;
+	margin-left: 3.5em;
+	margin-right: 3.5em;
+}
+
+p{
+	font-style: italic;
+	font-size: 1.8em;
+	font-weight: 500;
+	color: black;
+	margin: 0;
+}
+
+.row{
+	padding-left: 3.5em;
+	padding-right: 3.5em;
+}
+
+img{
+	height: 55%;
+	width: 100%;
+}

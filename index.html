@@ -1,96 +1,45 @@
-<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.7/jquery.min.js"></script>
-<script type="text/javascript">
-   var locationFinder = function(lat, long){
-         jQuery(document).ready(function($) {
-            $.ajax({
-            url: "/api/",
-            data: "p=" + lat + "," + long,
-            dataType: "json",
-            success: function(json) {
-               if (json.success == true) {
-                  var ab = json.response;
-                  $('#location').html("You are in " + ab[0].place.name + ", " + ab[0].place.stateFull); 
-               }
-               else {
-                  alert('An error occurred: ' + json.error.description);
-               }
-            }
-         });
-      });
-   };
+<html>
+   <head>
+      <link type="text/css" rel="stylesheet" href="css/materialize.min.css"  media="screen,projection"/>
+      <link type="text/css" rel="stylesheet" href="css/app.css"/>
+   </head>
 
-   var jumperTest = function(mornTemp, afterTemp, evenTemp) {
-      if(mornTemp < 60){
-         $('#morningSweater').html("Bring a sweater this morning!");
-      }
-      else{
-         $('#morningSweater').html("You wont need a sweater this morning!");
-      }
-      if(afterTemp < 60){
-         $('#afternoonSweater').html("Bring a sweater this afternoon!");
-      }
-      else{
-         $('#afternoonSweater').html("You wont need a sweater this afternoon!");
-      }
-      if(evenTemp < 60){
-         $('#eveningSweater').html("Bring a sweater this evening!");
-      }
-      else{
-         $('#eveningSweater').html("You wont need a sweater this evening!");
-      }
-   };
+   <body>
+      <div id="logo"><h1>s.weather</h1></div>
+      <div id="location"></div>
+      <div id="time"></div>
+      <hr>
+      <div class="row">
+         <div class="col s12 m4">
+            <div id="morning" class="card-image grey lighten-2">
+               <span class="card-title"><p>This morning...</p></span>
+               <img src="img/glasses.svg">
+               <div id="morningSweater"></div>
+               <div id="morningJacket"></div>
+            </div>
+         </div>
+         <div class="col s12 m4">
+            <div id="afternoon" class="card-image grey">
+               <span><p>This afternoon...</p></span>
+               <img src="img/jumper.svg">
+               <div id="afternoonSweater"></div>
+               <div id="afternoonJacket"></div>
+            </div>   
+         </div>
+         <div class="col s12 m4">
+            <div id="evening" class="card-image grey darken-2">
+               <span><p>This evening...</p></span>
+               <img src="img/umbrella.svg">
+               <div id="eveningSweater"></div>
+               <div id="eveningJacket"></div>
+         </div>
+         </div>
+      </div>
+      <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.7/jquery.min.js"></script>
+      <script type="text/javascript" src="js/ajaz.js"></script>
+      <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+      <script type="text/javascript" src="js/materialize.min.js"></script>
+   </body>
 
-   var jacketTest = function(mornPop, afterPop, evenPop) {
-      if(mornPop > 25){
-         $('#morningJacket').html("Bring a jacket this morning!");
-      }
-      else{
-         $('#morningJacket').html("You wont need a jacket this morning!");
-      }
-      if(afterPop > 25){
-         $('#afternoonJacket').html("Bring a jacket this afternoon!");
-      }
-      else{
-         $('#afternoonJacket').html("You wont need a jacket this afternoon!");
-      }
-      if(evenPop > 25){
-         $('#eveningJacket').html("Bring a jacket this evening!");
-      }
-      else{
-         $('#eveningJacket').html("You wont need a jacket this evening!");
-      }
-   };
-   jQuery(document).ready(function($) {
-      $.ajax({
-         url: "/api/",
-         // The data we want to get
-         data: 'filter=6hr&plimit=3&from=today+T06:00:00-08:00',
-         dataType: "json",
-         success: function(json) {
-            if (json.success == true) {
-               var ob = json.response;
-               locationFinder(ob[0].loc.lat, ob[0].loc.long);
-               jumperTest(ob[0].periods[0].minFeelslikeF, ob[0].periods[1].minFeelslikeF, ob[0].periods[2].minFeelslikeF);
-               jacketTest(ob[0].periods[0].pop, ob[0].periods[1].pop, ob[0].periods[2].pop);
-            }
-            else {
-               alert('An error occurred: ' + json.error.description);
-            }
-         }
-      });
-   });
-</script>
-<div id="location"></div>
-<div id="time"></div>
-<div id="morning">
-   <div id="morningSweater"></div>
-   <div id="morningJacket"></div>
-</div>
-<div id="afternoon">
-   <div id="afternoonSweater"></div>
-   <div id="afternoonJacket"></div>
-</div>
-<div id="evening">
-   <div id="eveningSweater"></div>
-   <div id="eveningJacket"></div>
-</div>
+</html>
+
