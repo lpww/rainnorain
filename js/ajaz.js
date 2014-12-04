@@ -33,7 +33,7 @@ var forecastFinder = function(){
    };
 
    var jacketTest = function(mornPop, afterPop, evenPop, mornTemp, afterTemp, evenTemp) {
-      if(mornPop > 100){
+      if(mornPop > 25){
          $("#morningCard").attr('class', 'card-image blue lighten-1');
          $('#morningImg').attr("src", "img/umbrella.svg");
          $('.morning').html("<p>...bring an umbrella!</p>");
@@ -41,7 +41,7 @@ var forecastFinder = function(){
       else{
          jumperTest('morning', mornTemp);
       }
-      if(afterPop > 100){
+      if(afterPop > 25){
          $("#afternoonCard").attr('class', 'card-image blue lighten-1');
          $('#afternoonImg').attr("src", "img/umbrella.svg");
          $('.afternoon').html("<p>...bring an umbrella!</p>");

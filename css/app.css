@@ -7,10 +7,10 @@ h1{
 	font-size: 2.5em;
 	font-weight: 400;
 	letter-spacing: 0.05em;
-	line-height:0.25;
+	line-height:0.82;
 	color: white;
 	margin-top: 0.5em;
-	margin-bottom: 0.5em;
+	margin-bottom: 0.15em;
 }
 
 #location{
@@ -24,8 +24,8 @@ h1{
 hr{
 	margin-bottom: 2em;
 	margin-top: 1.5em;
-	margin-left: 16em;
-	margin-right: 16em;
+	margin-left: 19%;
+	margin-right: 19%;
 	color: white;
 }
 
@@ -52,4 +52,8 @@ span p{
 img{
 	height: 55%;
 	width: 100%;
+}
+
+.card-image{
+	margin-bottom: 1em;
 }
