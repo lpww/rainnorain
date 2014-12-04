@@ -7,8 +7,9 @@ var forecastFinder = function(){
             success: function(json) {
                if (json.success == true) {
                   var ob = json.response;
+                  //save data to current city forecast cache
                   cache[currentLocation].forecast = ob[0];
-                  console.log(cache);
+                  //load from newly updated cache
                   jacketTest(cache[currentLocation].forecast.periods[0].pop, cache[currentLocation].forecast.periods[1].pop, cache[currentLocation].forecast.periods[2].pop, cache[currentLocation].forecast.periods[0].minFeelslikeF, cache[currentLocation].forecast.periods[1].minFeelslikeF, cache[currentLocation].forecast.periods[2].minFeelslikeF);
                }
                else {
@@ -58,8 +59,11 @@ var forecastFinder = function(){
       }
    };
 
+   //empty objec tto store cached data
    var cache = {};
+   //stores current location after one api call
    var currentLocation;
+   //objectbuild for new locations
    var locationBuilder = function(location){
       cache[location] = new Object;
    }
@@ -71,18 +75,20 @@ var forecastFinder = function(){
          success: function(json) {
             if (json.success == true) {
                var ab = json.response;
+               //update current location after initial call
                currentLocation = ab[0].place.name;
+               //create new object to store data for curent city
                locationBuilder(currentLocation);
-               //cache.locations
+               //save obesrvations data to cache.obervations
                cache[currentLocation].observations = ab[0];
                $('#location').html(ab[0].place.name + ", " + ab[0].place.stateFull); 
-               console.log(cache[currentLocation]);
-               console.log(cache);
+               //check cache for forecast data
                if(typeof cache[currentLocation].forecast === "object"){
-                  console.log("cache here");
+                  //load from cached data
                   jacketTest(cache[currentLocation].forecast[0].periods[0].pop, cache[currentLocation].forecast[0].periods[1].pop, cache[currentLocation].forecast[0].periods[2].pop, cache[currentLocation].forecast[0].periods[0].minFeelslikeF, cache[currentLocation].forecast[0].periods[1].minFeelslikeF, cache[currentLocation].forecast[0].periods[2].minFeelslikeF);
                }
                else{
+                  //send forecast api call
                   forecastFinder();
                }
             }
