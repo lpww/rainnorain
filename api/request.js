@@ -14,7 +14,7 @@ function buildRequest(query, credentials) {
         params = credentials;
 
     if(Object.keys(query).length === 1){
-        url = "http://api.aerisapi.com/places/closest?";
+        url = "http://api.aerisapi.com/observations/:auto?";
     }
 
     for (var param in query) {
