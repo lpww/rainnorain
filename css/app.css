@@ -50,7 +50,7 @@ span p{
 }
 
 img{
-	height: 52%;
+	height: 56.5%;
 	width: 100%;
 }
 
@@ -62,7 +62,7 @@ h6{
 	text-align: center;
 	color: white;
 	font-style: normal;
-	font-size:1.2em;
+	font-size:1em;
 	font-weight: 300;
 	letter-spacing: 0.02em;
 }
