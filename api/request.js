@@ -10,11 +10,11 @@ var credentials = require('./credentials'),
 // our hidden credentials
 // and the requested params
 function buildRequest(query, credentials) {
-    var url = 'http://api.aerisapi.com/forecasts/:auto?',
+    var url = "http://api.aerisapi.com/forecasts/:auto?",
         params = credentials;
 
     if(Object.keys(query).length === 1){
-        url = "http://api.aerisapi.com/observations/:auto?";
+        url = "http://api.aerisapi.com/places/:auto?";
     }
 
     for (var param in query) {
