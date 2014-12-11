@@ -21,6 +21,6 @@
     "body-parser": "^1.9.2",
     "connect": "^3.3.3",
     "serve-static": "^1.7.1",
-    "jquery.min.js": "^1.7"
+    "jquery": "^jquery-1.9.0"
   }
 }
