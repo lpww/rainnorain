@@ -23,6 +23,6 @@ app.use('/api', function apiResponse(req, res) {
     });
 });
 
-console.log('Running app at http://localhost:');
+console.log('Running app at http://localhost: 5000');
 
 
