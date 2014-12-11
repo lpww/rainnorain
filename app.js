@@ -7,7 +7,7 @@ var connect = require('connect'),
     querystring = require('querystring');
 
 // Routing for all static assets such as index.html
-app.use(serveStatic(__dirname)).listen(80);
+app.use(serveStatic(__dirname)).listen(process.env.PORT);
 
 // Specific routing for /api
 app.use('/api', function apiResponse(req, res) {
@@ -23,6 +23,6 @@ app.use('/api', function apiResponse(req, res) {
     });
 });
 
-console.log('Running app at http://localhost:80');
+console.log('Running app at http://localhost:');
 
 
