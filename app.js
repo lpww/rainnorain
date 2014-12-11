@@ -1,13 +1,14 @@
 "use strict"
 
-var connect = require('connect'),
+var express = require('express'),
     serveStatic = require('serve-static'),
     api = require('./api/request'),
-    app = connect(),
+    app = express(),
     querystring = require('querystring');
 
 // Routing for all static assets such as index.html
-app.use(serveStatic(__dirname)).listen(80);
+app.set('port', (process.env.PORT || 5000));
+app.use(express.static(__dirname + '/public'));
 
 // Specific routing for /api
 app.use('/api', function apiResponse(req, res) {
@@ -23,6 +24,8 @@ app.use('/api', function apiResponse(req, res) {
     });
 });
 
-console.log('Running app at http://localhost:80');
+app.listen(app.get('port'), function() {
+  console.log("Node app is running at localhost:" + app.get('port'));
+});
 
 
