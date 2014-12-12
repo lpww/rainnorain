@@ -48,7 +48,7 @@
              if (json.success == true) {
                 var ob = json.response;
                 $('#location').html(ob.place.name + ", " + ob.place.stateFull); 
-                $('#time').html(navigator.geolocation.getCurrentPosition(function(position){console.log(position.coords.latitude)}););
+                $('#time').html(navigator.geolocation.getCurrentPosition(function(position){console.log(position.coords.latitude)}));
              }
              else {
                 alert('An error occurred: ' + json.error.description);
