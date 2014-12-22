@@ -42,7 +42,7 @@
    jQuery(document).ready(function($) {
           $.ajax({
             url: "/api/",
-            data: 'fartfartfart',
+            data: '',
             dataType: "json",
             success: function(json){
               if(json.success == true){
