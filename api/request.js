@@ -10,16 +10,18 @@ var credentials = require('./credentials'),
 // our hidden credentials
 // and the requested params
 function buildRequest(query, credentials) {
-    var url = "http://api.aerisapi.com/forecasts/:auto?",
+    var url = "http://api.aerisapi.com/batch/:auto?requests=/places/,/forecasts/:auto?filter=6hr&plimit=3&from=today+T06:00:00-08:00&",
         params = credentials;
 
-    if(Object.keys(query).length === 1){
-        url = "http://api.aerisapi.com/places/:auto?";
-    }
+    // if(Object.keys(query).length === 1){
+    //     url = "http://api.aerisapi.com/places/:auto?";
+    // }
 
     for (var param in query) {
         params[param] = query[param];
     }
+
+    console.log(url + querystring.stringify(params));
 
     return url + querystring.stringify(params);
 }

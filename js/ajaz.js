@@ -1,3 +1,4 @@
+
    var jumperTest = function(id, temp) {
       if(temp < 60){
          $("#" + id + "Card").attr('class', 'card-image green lighten');
@@ -39,36 +40,19 @@
    };
 
    jQuery(document).ready(function($) {
-       $.ajax({
-          url: "/api/",
-          // The data we want to get
-          data: '',
-          dataType: "json",
-          success: function(json) {
-             if (json.success == true) {
-                var ob = json.response;
-                $('#location').html(ob.place.name + ", " + ob.place.stateFull); 
-                $('#time').html(navigator.geolocation.getCurrentPosition(function(position){console.log(position.coords.latitude)}));
-             }
-             else {
-                alert('An error occurred: ' + json.error.description);
-             }
-          }
-       });
-
-       $.ajax({
-          url: "/api/",
-          // The data we want to get
-          data: 'filter=6hr&plimit=3&from=today+T06:00:00-08:00',
-          dataType: "json",
-          success: function(json) {
-             if (json.success == true) {
-                var ob = json.response;
-                jacketTest(ob[0].periods[0].pop, ob[0].periods[1].pop, ob[0].periods[2].pop, ob[0].periods[0].minFeelslikeF, ob[0].periods[1].minFeelslikeF, ob[0].periods[2].minFeelslikeF);
-             }
-             else {
-                alert('An error occurred: ' + json.error.description);
-             }
-          }
-       });
+          $.ajax({
+            url: "/api/",
+            data: 'fartfartfart',
+            dataType: "json",
+            success: function(json){
+              if(json.success == true){
+                var places = json.response.responses[0].response;
+                var forecasts = json.response.responses[1].response;
+                $('#location').html(places.place.name + ", " + places.place.stateFull);
+                jacketTest(forecasts[0].periods[0].pop, forecasts[0].periods[1].pop, forecasts[0].periods[2].pop, forecasts[0].periods[0].minFeelslikeF, forecasts[0].periods[1].minFeelslikeF, forecasts[0].periods[2].minFeelslikeF);
+              } else {
+                alert('An error occured: ' +json.error.description);
+              }
+            }
+          });
     });

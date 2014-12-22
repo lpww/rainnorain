@@ -7,7 +7,7 @@ var connect = require('connect'),
     querystring = require('querystring');
 
 // Routing for all static assets such as index.html
-app.use(serveStatic(__dirname)).listen(process.env.PORT);
+app.use(serveStatic(__dirname)).listen(5000);
 
 // Specific routing for /api
 app.use('/api', function apiResponse(req, res) {
